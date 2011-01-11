@@ -1,4 +1,4 @@
-(function() {
+(function($) {
 	
 	PRECISION_PRIORITY = [
       'street_address',
@@ -204,4 +204,4 @@
 			});
 		}
 	};
-})();
+})(jQuery || django.jQuery);

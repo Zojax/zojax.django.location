@@ -3,3 +3,8 @@ fieldset.module.location {
   margin-left: 1em;
   width: 100px;
 }
+
+.vLocationField {
+  display:block;
+  margin-left: 10em;
+}

@@ -21,6 +21,10 @@ class LocationWidget(forms.Widget):
                 js = ('http://maps.google.com/maps/api/js?sensor=false',
                       '%slocation/locationwidget.js' % settings.MEDIA_URL,
                 )
+                css = {'all': ('%slocation/admin-style.css' % settings.MEDIA_URL,
+                               )
+                }
+
     
     def __init__(self, *args, **kwargs):
         if 'precision' in kwargs:
@@ -96,13 +100,17 @@ class LocationChoiceWidget(forms.Widget):
             except LocatedItem.DoesNotExist:
                 pass
         elif not isinstance(value, LocatedItem):
-            value = LocatedItem(lat=value[0], lng=value[1], country=value[2], state=value[3], city=value[4])
-        
-        for widget in [self.city, self.state, self.country]:
-            for k, v in widget.extra.items():
-                if not k.startswith(name+'_'):
-                    del widget.extra[k]
-                    widget.extra[name+'_' +k] = name+'_'+v
+            if value:
+                value = LocatedItem(lat=value[0], lng=value[1], country=value[2], state=value[3], city=value[4])
+            else:
+                value = LocatedItem()
+
+#        for widget in [self.city, self.state, self.country]:
+#            for k, v in widget.extra.items():
+#                if not k.startswith(name+'_'):
+#                    del widget.extra[k]
+#                    widget.extra[name+'_' +k] = name+'_'+v
+
         output = []
         final_attrs = self.build_attrs(attrs)
         id_ = final_attrs.get('id', None)
@@ -193,3 +201,8 @@ class LocationField(forms.Field):
 class LocationChoiceField(LocationField):
     
     widget = LocationChoiceWidget
+    
+    def __init__(self, showMap=False, readonly=False, *kv, **kw):
+        self.showMap = showMap
+        self.readonly = readonly
+        super(LocationField, self).__init__(*kv, **kw)

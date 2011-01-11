@@ -10,7 +10,8 @@
 {% endif %}
 {% endif %}
 <script type="text/javascript">
-    $(function() {
+(function($) {
+    $(document).ready(function() {
         new LocationWidget(
             {canvas:"#{{ name }}_map_canvas",
              lat_field:"input[name='{{ name }}{{ widget.LAT_SUFFIX }}']",
@@ -24,5 +25,5 @@
              showMap: {{ showMap }},
              readonly: {{ readonly }}}
         );
-    });
+    })})(django.jQuery)
 </script>
