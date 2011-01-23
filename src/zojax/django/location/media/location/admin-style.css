@@ -1,0 +1,10 @@
+fieldset.module.location {
+  float: right;
+  margin-left: 1em;
+  width: 100px;
+}
+
+.vLocationField {
+  display:block;
+  margin-left: 10em;
+}
