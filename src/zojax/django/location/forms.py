@@ -19,9 +19,9 @@ class LocationWidget(forms.Widget):
     
     class Media:
                 js = ('http://maps.google.com/maps/api/js?sensor=false',
-                      '%slocation/locationwidget.js' % settings.MEDIA_URL,
+                      '%slocation/locationwidget.js' % settings.STATIC_URL,
                 )
-                css = {'all': ('%slocation/admin-style.css' % settings.MEDIA_URL,
+                css = {'all': ('%slocation/admin-style.css' % settings.STATIC_URL,
                                )
                 }
 
